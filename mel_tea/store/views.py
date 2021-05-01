@@ -25,3 +25,7 @@ def about(request):
 def menu(request): 
     context = {}
     return render(request, 'store/menu.html', context)
+
+def login(request): 
+    context = {}
+    return render(request, 'store/login.html', context)

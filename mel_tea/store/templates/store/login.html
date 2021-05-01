@@ -1,0 +1,30 @@
+<!-- Source: https://docs.djangoproject.com/en/3.2/topics/auth/default/ -->
+<!-- Source2: https://docs.djangoproject.com/en/3.2/topics/auth/ -->
+
+{% extends 'store/main.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="outer-container">
+    <div class="login-container">
+        <img src="{% static 'images/logo.png'%}" alt="">
+        <h1>Log In</h1>
+        <div class="login-inner-container">
+            <form action="" method="POST" class="form-login">
+                {% csrf_token %}
+                {{form|crispy}}
+                <input type="text" name="" placeholder="Enter Your Username" required>
+                <input type="password" placeholder="Enter Your Password" required>
+                <input type="Submit" value="Login">
+            </form>
+            <p>Don't have an acount? <a href="">Register Now!</a></p>
+            <a href="">Forgot your password?</a>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock content%}
