@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 
+html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
 body {
     background-color: white;
     font-family: Comfortaa;

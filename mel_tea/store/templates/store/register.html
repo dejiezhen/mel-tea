@@ -1,0 +1,37 @@
+<!-- Source: https://docs.djangoproject.com/en/3.2/topics/auth/default/ -->
+<!-- Source2: https://docs.djangoproject.com/en/3.2/topics/auth/ -->
+
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="outer-container">
+    <div id="form-logo">
+      <img src="{% static 'images/logo.png' %}" alt="">
+    </div>
+      <!-- Login Form -->
+    
+    <form action="" method="POST" class="form-users" id="form-register">
+        {% csrf_token %}
+        <!-- Getting rid of the excess information that we don't want from form -->
+        {% for fields in form %}
+            <!-- Only render the username, email, pass label with field -->
+            {{fields.label}}
+            {{fields}}
+        {% endfor %}
+        <input type="submit" name="create-user">
+    </form>
+  
+      <!-- Remind Passowrd -->
+      <div id="form-footer">
+        <!-- If error occurred -->
+        {{form.errors}}
+        <p>Already have an account? <a href="{% url 'login' %}">Sign in Now!</a></p>
+        <a href="">Forgot your password?</a>
+      </div>
+  
+</div>
+
+
+
+{% endblock content%}
