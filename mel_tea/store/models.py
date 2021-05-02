@@ -3,6 +3,7 @@
 from django.db import models
 
 # Create your models here.
+
 # Connection with our database. 
 # Running python3 manage.py makemigrations - implement each model into database
 # python3 manage.py migration to apply the migrations
@@ -33,6 +34,7 @@ class BobaProduct(models.Model):
     description = models.CharField(max_length=500, null=True)
     date_created = models.DateTimeField(auto_now_add=True) 
 
+# Customer's Order model. Addresses the current status of delivery and what toppings
 class Customer_Order(models.Model):
     CURR_STATUS = [
         ("Pending", "Pending"),

@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 
-html{
+*{
     margin: 0;
     padding: 0;
-    height: 100%;
+    /* height: 100%; */
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 body {
@@ -76,6 +78,33 @@ body {
     text-decoration: none;
     padding:.5rem;
     /* border-radius: 5%; */
+}
+
+/* Media Query, adjust styles based on phone size */
+@media only screen and (min-device-width: 320px) and 
+                       (max-device-height: 896px) and 
+                       (-webkit-device-pixel-ratio: 3){
+    .main-container-inner p{
+        font-weight: 1000;
+        font-size: 3.2rem;
+        margin-bottom: .5rem;
+    }
+    
+    .main-container-inner span{
+        font-weight: 600;
+        font-size: 1.5rem;
+        margin-bottom: 1.3rem;
+    }
+    
+    .main-container-inner a{
+        /* border:3px solid white; */
+        font-weight: 300;
+        font-size: 1.7rem;
+        color:white;
+        text-decoration: none;
+        padding:.5rem;
+        /* border-radius: 5%; */
+    }
 }
 
 .main-container-inner a:hover{

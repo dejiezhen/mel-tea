@@ -1,10 +1,10 @@
-// 'use strict';
+'use strict';
 
-// Grabbing form fields and setting placeholders for each field in register page
-
-
+// Grab the current html file name 
 const currHtml = window.location.pathname.split("/");
 console.log("Current HTML Page " + currHtml[1]);
+
+// Grabbing form fields and setting placeholders for each field in register page
 if (currHtml[1] == 'register'){
     let formFieldsRegis = $('#form-register input');
     let placeHolderRegis = ['Username', 
@@ -15,7 +15,6 @@ if (currHtml[1] == 'register'){
         formFieldsRegis[i+1].placeholder = placeHolderRegis[i];
     }
 }
-
 
 // Setting placeholders for each field in log in page
 if(currHtml[1] == 'login'){
