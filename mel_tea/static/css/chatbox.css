@@ -1,0 +1,41 @@
+.chatbox {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: auto;
+    width: 50%;
+    height: 70vh;
+    border: 1px solid black;
+}
+
+#main-chat{
+    width: 80%;
+    margin: .5rem auto;
+    height: 20rem;
+    resize: none;
+}
+
+#user-message {
+    width: 80%;
+    margin: .5rem auto;
+    resize: none;
+}
+
+#send-button{
+    width: 20%;
+    margin: .5rem auto;
+}
+
+
+
+@media only screen and (min-device-width: 320px) and 
+                       (max-device-height: 896px) and 
+                       (-webkit-device-pixel-ratio: 3){
+.chatbox {
+    width: 80%;
+}
+
+#send-button{
+    width: 40%;
+}
+}

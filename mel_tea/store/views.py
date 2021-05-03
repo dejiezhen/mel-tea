@@ -77,3 +77,7 @@ def register(request):
                 return redirect('login') #redirect user to login page is the form is valid
     context = {'form': form}
     return render(request, 'store/register.html', context)
+
+def chatbox(request):
+    context = {}
+    return render(request, 'store/chatbox.html', context)
