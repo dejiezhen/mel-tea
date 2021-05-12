@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 class Order(ModelForm):
     # class container metadata
     class Meta: 
-        model = Customer_Order()
+        model = CustomerOrder()
         #all fields for the form
         fields = "__all__"  
 

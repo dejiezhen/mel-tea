@@ -103,7 +103,7 @@ body {
         padding:.5rem;
         /* border-radius: 5%; */
     }
-/* 
+    /* 
     .chatbot-footer img{
         right: 50%;
         bottom: 50%;
@@ -123,4 +123,8 @@ body {
     bottom: .7rem;
     align-items: center;
     /* border: 1px solid black; */
+}
+
+.founders{
+    font-weight:bold;
 }

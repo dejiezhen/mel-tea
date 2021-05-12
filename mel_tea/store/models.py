@@ -35,7 +35,7 @@ class BobaProduct(models.Model):
     date_created = models.DateTimeField(auto_now_add=True) 
 
 # Customer's Order model. Addresses the current status of delivery and what toppings
-class Customer_Order(models.Model):
+class CustomerOrder(models.Model):
     CURR_STATUS = [
         ("Pending", "Pending"),
         ("Delivering", "Delivering"),

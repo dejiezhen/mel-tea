@@ -10,4 +10,4 @@ admin.site.register(Customer)
 admin.site.register(BobaProduct)
 
 # Register the Customer Order model into admin panel 
-admin.site.register(Customer_Order)
+admin.site.register(CustomerOrder)
