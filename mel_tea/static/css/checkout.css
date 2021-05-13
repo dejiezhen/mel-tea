@@ -1,0 +1,36 @@
+.checkout-btn{
+    float: right;
+    margin: 5px;
+}
+
+.cart-row{
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+
+
+.row-image{
+    width: 30%;
+    height: auto;
+}
+
+.cart-row-flex-2{
+    flex: 2;
+}
+
+.cart-row-flex-1{
+    flex: 1;
+}
+.form-field{
+    display: inline-block;
+    width: 250px;
+    padding: 5px;
+}
+
+.btn-block{
+    display:block;
+    width: 100%;
+}

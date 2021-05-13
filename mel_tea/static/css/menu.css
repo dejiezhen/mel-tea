@@ -2,3 +2,36 @@
     width: 100%;
     height: 250px;
 }
+
+.product-price{
+    display:inline-block;
+}
+
+.product-box{
+    border-radius: 4px;
+    padding:10px;
+    box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+    border:1px solid green;
+}
+
+.col-md-3 {
+    margin:10px 1px;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+.quantity {
+    display: inline-block;
+    padding-right: 10px;
+    margin: 0 2px;
+}
+
+.quantity-change {
+    width: 15px;
+    cursor: pointer;
+    transition: .1s;
+    display: block;
+    margin-top: 5px;
+}

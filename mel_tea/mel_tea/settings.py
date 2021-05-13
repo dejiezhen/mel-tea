@@ -127,5 +127,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+MEDIA_URL = '/images/boba/'
+# Uploading our media, it will dynamically upload it to static folder
+# NEED TO SOLVE DUPLICATE IMAGE ISSUE.
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/')
 
 # LOGIN_REDIRECT_URL = '/auth/logged_in'

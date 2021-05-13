@@ -1,5 +1,8 @@
 # Source: https://docs.djangoproject.com/en/3.2/topics/auth/default/
 
+#Query set doc: https://docs.djangoproject.com/en/3.2/ref/models/querysets/
+#Django Relationship Models: https://www.webforefront.com/django/setuprelationshipsdjangomodels.html
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
@@ -16,11 +19,36 @@ def store(request):
     return render(request, 'store/store.html', context)
 
 def cart(request):
-    context = {}
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        # Get customer order or if complete = false, create new order
+        order, created = CustomerOrder.objects.get_or_create(customer=customer)
+
+        # Get all the items attached to the order of the customer. Querying child obj 
+        # get OrderItem model with orderitem_set.all(). This order is attached to customer
+        items = order.orderitem_set.all()   # (USE ITEM FOR CHILDREN)
+    else:
+        # Maybe make the users create the account?
+        items = []
+        order = {'cart_total':0, 'cart_quantity':0}
+
+    context = {"items": items, "order": order}
     return render(request, 'store/cart.html', context)
 
 def checkout(request):
-    context = {}
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        # Get customer order or if complete = false, create new order
+        order, created = CustomerOrder.objects.get_or_create(customer=customer)
+
+        # Get all the items attached to the order of the customer. Querying child obj 
+        # get OrderItem model with orderitem_set.all(). This order is attached to customer
+        items = order.orderitem_set.all()   # (USE ITEM FOR CHILDREN)
+    else:
+        # Maybe make the users create the account?
+        items = []
+        order = {'cart_total':0, 'cart_quantity':0}
+    context = {"items":items, "order":order}
     return render(request, 'store/checkout.html', context)
 
 def simulate(request):
@@ -32,7 +60,10 @@ def about(request):
     return render(request, 'store/about.html', context)
 
 def menu(request): 
-    context = {}
+    # Get all our object
+    products = BobaProduct.objects.all()
+    # Dictionary to hold our products
+    context = {"products": products}
     return render(request, 'store/menu.html', context)
 
 def loginUser(request): 
