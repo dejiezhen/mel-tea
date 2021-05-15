@@ -49,9 +49,9 @@
                 <div class="cart-row-flex-1">
                     <p class="quantity">{{item.quantity}}</p>
                     <div class="quantity">
-
-                        <img class="quantity-change" src="{% static 'images/arrow-up.png' %}" alt="">
-                        <img class="quantity-change" src="{% static 'images/arrow-down.png' %}" alt="">
+                        <!-- Arrows to increase quantity or decrease quantity -->
+                        <img data-product={{item.product.id}} data-action="add" class="quantity-change add-cart" src="{% static 'images/arrow-up.png' %}">
+                        <img data-product={{item.product.id}} data-action="remove" class="quantity-change add-cart" src="{% static 'images/arrow-down.png' %}">
                     </div>
                 </div>
                 <div class="cart-row-flex-1">

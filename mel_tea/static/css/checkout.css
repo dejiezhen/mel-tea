@@ -1,6 +1,7 @@
 .checkout-btn{
-    float: right;
-    margin: 5px;
+    /* margin: 5px; */
+    vertical-align: bottom;
+    float:right;
 }
 
 .cart-row{
@@ -34,3 +35,16 @@
     display:block;
     width: 100%;
 }
+
+.table{
+    width:450px;
+	display: inline-block;
+	padding: 5px;
+    border-collapse: separate;
+
+    
+}
+
+.table th{
+    width: 25%;
+} 

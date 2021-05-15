@@ -13,6 +13,25 @@
     <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
     <link rel="stylesheet" href="{% static 'css/chatbox.css' %}">
     <link rel="icon" href="{% static 'images/logo.png' %}">
+    <script type="text/javascript">
+        const user = "{{request.user}}"
+        function getToken(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getToken('csrftoken');
+    </script>
     <title>mel-tea</title>
 </head>
 <body>
@@ -47,7 +66,7 @@
                 <a href="{% url 'cart' %}">
                     <img id="cart-icon" src="{% static 'images/shoppingcart.png' %}">
                 </a>
-                <p id="cart-amount">0</p>
+                <p id="cart-amount">{{cart_items}}</p>
             </div>   
         </div>     
     </nav>
@@ -71,5 +90,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'javascript/simulate.js' %}"></script>
     <script src="{% static 'javascript/forms.js' %}"></script>
+    <script src="{% static 'javascript/shoppingcart.js' %}"></script>
+    <script src="{% static 'javascript/checkout.js' %}"></script>
+
 </body>
 </html>

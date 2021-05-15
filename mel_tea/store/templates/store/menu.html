@@ -1,20 +1,25 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
-<div class="row justify-content-evenly">
+<div class="container">
+  <div class="row justify-content-evenly">
     <!-- Loop through each block, inputting values in our database -->
     {% for product in products %}
-    <div class="col-md-3" style="border:1px solid black">
+    <div class="col-lg-4">
       <!-- Grabbing image via URL of the image -->
       <img class="drink-thumbnail" src="{{product.image_url}}" alt="">
       <div class="product-box">
         <p>{{product.name}}</p>
         <hr>
-        <button class="btn btn-outline-dark">Add to Cart</button>
+        <!-- Add product id action, store in database to know which boba was added -->
+        <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-dark add-cart">Add to Cart</button>
         <a href="#" class="btn btn-outline-success">View</a>
         <h3 class="product-price">${{product.price|floatformat:2}}</h3>
       </div>
     </div>
     {% endfor %}
 </div>
+
+</div>
+
 {% endblock content %}
