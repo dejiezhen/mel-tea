@@ -14,25 +14,25 @@
                         <div class="form-field">
                             <input required class="form-control" type="email" name="email" placeholder="Email..">
                         </div>
+                        <div class="form-field">
+                            <input required class="form-control" type="phone" name="phone" placeholder="Phone..">
+                        </div>
                     </div>
     
                     <div id="shipping-info">
                         <p>Shipping Information:</p>
                         <hr>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="address" placeholder="Address..">
+                            <input class="form-control" type="text" name="address" placeholder="Address.." required>
                         </div>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="city" placeholder="City..">
+                            <input class="form-control" type="text" name="city" placeholder="City.." required>
                         </div>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="state" placeholder="State..">
+                            <input class="form-control" type="text" name="state" placeholder="State.." required>
                         </div>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
-                        </div>
-                        <div class="form-field">
-                            <input class="form-control" type="text" name="country" placeholder="Country..">
+                            <input class="form-control" type="text" name="zipcode" placeholder="Zip code.." required>
                         </div>
                     </div>
     
@@ -41,7 +41,12 @@
                 </form>
                 <br>
                 <div class="product-box hidden" id="payment">
-                    <p>Payment Options</p>
+                    {% if is_authenticated %}
+                    <p>Thank you for ordering {{request.user}}!</p>
+                    <p>Please venmo the total amount at @dejie-zhen</p>
+                    {% endif %}
+                    <p>Thank you for ordering!</p>
+                    <p>Please venmo the total amount at @dejie-zhen</p>
                 </div>
             </div>
         </div>

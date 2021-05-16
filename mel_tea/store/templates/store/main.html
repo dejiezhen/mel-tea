@@ -15,6 +15,7 @@
     <link rel="icon" href="{% static 'images/logo.png' %}">
     <script type="text/javascript">
         const user = "{{request.user}}"
+        const email = "{{request.user.email}}"
         function getToken(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie !== '') {
@@ -59,7 +60,7 @@
                 <a href="{% url 'login' %}" class="btn btn-outline-dark">Login</a>
                 {% endif %}
 
-                <!-- If user is logged i, show logout button only -->
+                <!-- If user is logged in, show logout button only -->
                 {% if user.is_authenticated %}
                 <a href="{% url 'logout' %}" class="btn btn-outline-dark">Logout</a>
                 {% endif %}
@@ -88,6 +89,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script src="{% static 'javascript/simulate.js' %}"></script>
     <script src="{% static 'javascript/forms.js' %}"></script>
     <script src="{% static 'javascript/shoppingcart.js' %}"></script>
