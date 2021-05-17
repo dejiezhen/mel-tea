@@ -24,7 +24,10 @@ urlpatterns = [
     path('', include('store.urls')), #include the url redirect from store urls
     path('login/', auth_views.LoginView.as_view(template_name ='store/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+<<<<<<< HEAD
     # path('chat/', include('store.urls'))
+=======
+>>>>>>> b067d2c3dde3e058dcc0f78e513a2bec05c05391
 ]
 
 # Statically change media url to media root

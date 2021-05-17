@@ -11,7 +11,6 @@ urlpatterns = [
     path('login/', views.loginUser, name="login"),
     path('logout/', views.logoutUser, name="logout"),
     path('register/', views.register, name="register"),
-    path('chatbox/', views.chatbox, name="chatbox"),
     path('update_item/', views.updateItem, name="update_item"), 
     path('chat/', views.room, name='chat')
 ]
