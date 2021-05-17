@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'store.apps.StoreConfig',
-    'crispy_forms'
-    
+    'crispy_forms',
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -133,3 +133,15 @@ MEDIA_URL = '/images/boba/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/')
 
 # LOGIN_REDIRECT_URL = '/auth/logged_in'
+
+# mysite/settings.py
+# Channels
+ASGI_APPLICATION = 'mel_tea.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
