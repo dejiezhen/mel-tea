@@ -13,6 +13,5 @@ urlpatterns = [
     path('register/', views.register, name="register"),
     path('chatbox/', views.chatbox, name="chatbox"),
     path('update_item/', views.updateItem, name="update_item"), 
-    path('chat/', views.index, name='index'),
-    path('chat/<str:room_name>/', views.room, name='room'),
+    path('chat/', views.room, name='chat')
 ]

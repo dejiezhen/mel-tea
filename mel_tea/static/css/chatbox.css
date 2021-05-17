@@ -1,29 +1,56 @@
+.chatbox-container {
+    background-image: url("/static/images/home-background.jpg");
+    height: 100vh;
+    width: 100vw;
+    /* max-width: 100%; */
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    /* opacity: .85; */
+    border:1px solid rgb(241, 148, 61);
+}
+
 .chatbox {
     display: flex;
     flex-direction: column;
     text-align: center;
     margin: auto;
-    width: 50%;
-    height: 70vh;
-    border: 1px solid black;
+    width: 60%;
+    height: 64vh;
+    margin-top: 50px;
+    gap: 5px;
 }
 
 #main-chat{
     width: 80%;
-    margin: .5rem auto;
-    height: 20rem;
+    margin-top: .5rem;
+    margin-bottom: 0rem;
+    margin-left: auto;
+    margin-right: auto;
+    /* height: 20rem; */
     resize: none;
+    padding: 20px;
+    border-radius: 8px;
+    border: none;
 }
 
 #user-message {
+    height: 40px;
     width: 80%;
-    margin: .5rem auto;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
     resize: none;
+    padding-left: 17px;
+    border-radius: 8px;
+    border: none;
 }
 
 #send-button{
     width: 20%;
-    margin: .5rem auto;
+    margin: 10px auto; 
+    padding: 0.2rem 0;
+    border-radius: 8px;
+    border-width: 1.5px;
 }
 
 

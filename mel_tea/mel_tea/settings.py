@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'store.apps.StoreConfig',
     'crispy_forms',
-    'channels'
+    'channels',
 ]
 
 MIDDLEWARE = [
