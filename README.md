@@ -11,6 +11,8 @@ brew install redis <br>
     -START REDIS SERVER: redis-server
 
 <br>
+
+
 *******************
 MODEL MIGRATIONS 
 *******************
