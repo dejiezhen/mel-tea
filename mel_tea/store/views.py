@@ -1,3 +1,11 @@
+"""
+views.py
+
+Functions to direct you towards the correct HTML Path. Also the logic to 
+build out our website
+
+"""
+
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
@@ -11,9 +19,16 @@ import json
 from .models import *
 from .forms import GuestChat, RegisterUserForm
 
-# Functions to direct you towards the correct html path
 
 def store(request):
+    """
+    store
+    Main Page
+    
+    Args: 
+        request
+
+    """
     cart = cartData(request)
     cart_items = cart['cart_items']
     # order = cart['order']
@@ -26,15 +41,31 @@ def store(request):
     return render(request, 'store/store.html', context)
 
 def cart(request):
+    """
+    cart
+    Cart Logic
+    
+    Args: 
+        request
+
+    """
     cart = cartData(request)
     cart_items = cart['cart_items']
     order = cart['order']
     items = cart['items']
-    products = BobaProduct.objects.all()
+    # products = BobaProduct.objects.all()
     context = {"items": items, "order": order, 'cart_items':cart_items}
     return render(request, 'store/cart.html', context)
 
 def checkout(request):
+    """
+    checkout
+    checkout Logic. 
+    
+    Args: 
+        request
+
+    """
     cart = cartData(request)
     cart_items = cart['cart_items']
     order = cart['order']
@@ -44,29 +75,53 @@ def checkout(request):
 
 
 def about(request): 
+    """
+    about
+    about page - not fully designed
+    
+    Args: 
+        request
+
+    """
     context = {}
     return render(request, 'store/about.html', context)
 
 def menu(request): 
+    """
+    menu
+    menu page logic. displaying all the products in our DB
+    
+    Args: 
+        request
+
+    """
     cart = cartData(request)
     cart_items = cart['cart_items']
-    order = cart['order']
-    items = cart['items']
+    # order = cart['order']
+    # items = cart['items']
     # Get all our object
     products = BobaProduct.objects.all()
     # Dictionary to hold our products
     context = {"products": products, "cart_items": cart_items}
     return render(request, 'store/menu.html', context)
 
-# Get Json response when item is added. Get message into template
+# Get Json response when item is added. Put message into template
 def updateItem(request):
+    """
+    updateItem
+    
+    When users click on the up or down arrow, 
+    the item quantity updates
+    
+    Args: 
+        request
+
+    """
     # Getting the data when you add to cart. Body of JSON
     data = json.loads(request.body)
     # Getting values we sent to body as JSON. prodID and Action
     productId = data['prodId']
     action = data['action']
-    print("Action: ", action)
-    print("Product ID: ", productId)
 
     # Get curr customer
     customer = request.user.customer
@@ -91,6 +146,16 @@ def updateItem(request):
     return JsonResponse('Item was added', safe=False)
 
 def loginUser(request): 
+    """
+    login
+    Checks if user is logged in. authenticating the username
+    and password with our DB
+    
+    Args: 
+        request
+
+    """
+
     # If logged in, won't be able to acces /register path
     # user redirected back to home store page
     if request.user.is_authenticated:
@@ -112,10 +177,32 @@ def loginUser(request):
     return render(request, 'store/login.html', context)
 
 def logoutUser(request):
+    """
+    Logout
+    Users logging out logic
+    
+    Args: 
+        request
+
+    """
     logout(request)
     return redirect('login')
 
 def register(request): 
+    """
+    register
+    Users can register an account. When users finish registering,
+    it will send a signal (signal.py) and save the information to the
+    Customer model also. The customer model will be added to the Group 
+    model designed for customers. 
+
+    Customer group have limited access. 
+    
+    Args: 
+        request
+
+    """
+
     # If logged in, won't be able to acces /register path
     # user redirected back to home store page
     if request.user.is_authenticated:
@@ -134,6 +221,15 @@ def register(request):
     return render(request, 'store/register.html', context)
 
 def guestChat(request):
+    """
+    guestChat
+    If the user is not authenticated, they will be redirected to this
+    site where they can input a guest name and enter the chatbox
+    
+    Args: 
+        request
+
+    """
     form = GuestChat()
     if request.method == "POST":
         form = GuestChat(request.POST)
@@ -145,10 +241,18 @@ def guestChat(request):
     return render(request, 'chat/guestUser.html', context)
 
 def room(request):
+    """
+    room
+    Room where users can chat with each other!
+    
+    Args: 
+        request
+
+    """
     cart = cartData(request)
     cart_items = cart['cart_items']
-    order = cart['order']
-    items = cart['items']
+    # order = cart['order']
+    # items = cart['items']
  
     # Get all our object
     products = BobaProduct.objects.all()

@@ -1,3 +1,5 @@
+let currUser = $(".currentUser").text();
+
 const chatSocket = new WebSocket(
     'ws://'
     + window.location.host
@@ -20,8 +22,6 @@ document.querySelector('#user-message').onkeyup = function(e) {
     }
 };
 
-
-let currUser = $(".currentUser").text();
 document.querySelector('#send-button').onclick = function(e) {
     const messageInputDom = document.querySelector('#user-message');
     const message = currUser + ": " + messageInputDom.value;

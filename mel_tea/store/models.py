@@ -2,8 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 # Models for Database
 
-# Customer Model
+
 class Customer(models.Model): 
+    """
+    Customer Model
+
+    Args: 
+        models.Model
+
+    """
     # null = True will allow us to make changes to database. 
     # 2 possible vals for no data, NULL or empty string
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True, related_name = 'customer')
@@ -17,8 +24,15 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
-# Boba Product Model
+
 class BobaProduct(models.Model):
+    """
+    BobaProduct Model
+
+    Args: 
+        models.Model
+
+    """
     WITH_BOBA = [
         ('YES', 'Boba'),
         ('NO', 'No Boba')
@@ -42,8 +56,17 @@ class BobaProduct(models.Model):
             url = ''
         return url
 
-# Customer's Order model. Addresses the current status of delivery and what toppings
+
 class CustomerOrder(models.Model):
+    """
+    CustomerOrder Model
+
+    Addresses the current status of delivery and what toppings the user wants
+
+    Args: 
+        models.Model
+
+    """
     # Customer can have multiple orders. Many orders to one user = ForeignKey
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
     date_ordered = models.DateTimeField(auto_now_add=True) 
@@ -72,6 +95,13 @@ class CustomerOrder(models.Model):
 
 
 class OrderItem(models.Model):
+    """
+    OrderItem Model
+
+    Args: 
+        models.Model
+
+    """
     product = models.ForeignKey(BobaProduct, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(CustomerOrder, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
@@ -86,6 +116,13 @@ class OrderItem(models.Model):
         return total
 
 class CustomerShippingAddresses(models.Model):
+    """
+    CustomerShippingAddresses Model
+
+    Args: 
+        models.Model
+
+    """
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
     order = models.ForeignKey(CustomerOrder, on_delete=models.SET_NULL, null=True)
     address = models.CharField(max_length=200, null=True)
