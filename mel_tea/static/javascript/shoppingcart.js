@@ -5,6 +5,22 @@ let cartNum = $('#cart-amount');
 
 console.log(addCartBtn);
 
+function addingCookieItems(productID, action){
+    if(action == 'add'){
+        !cart[productID]? cart[productID] = {'quantity': 1}: cart[productID]['quantity'] ++;
+    }
+
+    if(action == 'remove'){
+        cart[productID]['quantity']--;
+        if(cart[productID]['quantity'] <= 0){
+            delete cart[productID]
+        }
+    }
+    console.log(cart)
+    document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+    location.reload() //reload website
+}
+
 
 addCartBtn.on('click', function(){
     let prodId = this.dataset.product;
@@ -15,6 +31,7 @@ addCartBtn.on('click', function(){
         updatingOrder(prodId, action);
     } else {
         console.log("User not logged in");
+        addingCookieItems(prodId, action)
     }
 })
 

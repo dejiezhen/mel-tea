@@ -4,10 +4,11 @@
 {% block content %}
 <div class="guestChat">
     <h3>Hello Guest! Please enter your name</h3>
-    <form action="GET" id="guestForm">
-        <input type="text" id="guestUser">
+    <form method="POST" id="guestForm">
+        {% csrf_token %}
+        <!-- Form with only user name -->
+        {{form}}
         <input type="submit" id="guestSubmit">
     </form>
-    <p id="guestError" class='hidden'>Please enter a valid name!</p>
 </div>
 {% endblock %}

@@ -1,5 +1,3 @@
-# Source: https://docs.djangoproject.com/en/1.8/_modules/django/contrib/auth/forms/
-
 from django.forms import ModelForm
 from django import forms
 
@@ -19,3 +17,6 @@ class RegisterUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+
+class GuestChat(forms.Form):
+    guest_name = forms.CharField(label='Your name', max_length=100)

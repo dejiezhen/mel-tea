@@ -37,9 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'store.apps.StoreConfig',
     'crispy_forms',
     'channels',
+    'store.apps.StoreConfig',
+    
 ]
 
 MIDDLEWARE = [
@@ -131,7 +132,7 @@ MEDIA_URL = '/images/boba/'
 # Uploading our media, it will dynamically upload it to static folder
 # NEED TO SOLVE DUPLICATE IMAGE ISSUE.
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/')
-
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 # LOGIN_REDIRECT_URL = '/auth/logged_in'
 
 # mysite/settings.py

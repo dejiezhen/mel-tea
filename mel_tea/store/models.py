@@ -1,19 +1,12 @@
-# Source:https://docs.djangoproject.com/en/3.2/topics/files/ 
-# Source2: https://docs.djangoproject.com/en/3.2/topics/db/examples/many_to_one/
-
 from django.db import models
 from django.contrib.auth.models import User
-# Create your models here.
-
-# Connection with our database. 
-# Running python3 manage.py makemigrations - implement each model into database
-# python3 manage.py migrate to apply the migrations
+# Models for Database
 
 # Customer Model
 class Customer(models.Model): 
     # null = True will allow us to make changes to database. 
     # 2 possible vals for no data, NULL or empty string
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True, related_name = 'customer')
     name = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
@@ -31,7 +24,7 @@ class BobaProduct(models.Model):
         ('NO', 'No Boba')
     ]
     name = models.CharField(max_length=200, null=True)
-    price = models.FloatField(max_length=200, null=True)
+    price = models.DecimalField(max_digits=7, decimal_places=2)
     category = models.CharField(max_length=200, null=True, choices= WITH_BOBA)
     image = models.ImageField(upload_to='boba', default="{% static 'images/filler.jpg' %}", null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True) 
@@ -51,17 +44,6 @@ class BobaProduct(models.Model):
 
 # Customer's Order model. Addresses the current status of delivery and what toppings
 class CustomerOrder(models.Model):
-    # CURR_STATUS = [
-    #     ("Pending", "Pending"),
-    #     ("Delivering", "Delivering"),
-    #     ("Delivered", "Delivered")
-    # ]
-
-    # WITH_BOBA = [
-    #     ('YES', 'Boba'),
-    #     ('NO', 'No Boba')
-    # ]
-
     # Customer can have multiple orders. Many orders to one user = ForeignKey
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
     date_ordered = models.DateTimeField(auto_now_add=True) 

@@ -20,8 +20,8 @@ document.querySelector('#user-message').onkeyup = function(e) {
     }
 };
 
-let currUser = $("#user-name").text();
 
+let currUser = $(".currentUser").text();
 document.querySelector('#send-button').onclick = function(e) {
     const messageInputDom = document.querySelector('#user-message');
     const message = currUser + ": " + messageInputDom.value;
@@ -30,14 +30,3 @@ document.querySelector('#send-button').onclick = function(e) {
     }));
     messageInputDom.value = '';
 };
-
-
-// Guest 
-
-// $("#guestSubmit").click(function(){
-//     let guestUser = $("#guestUser").text();
-//     if(guestUser === '') {
-//         $("#guestError").css("visibility", "visible");
-//     }
-
-// })

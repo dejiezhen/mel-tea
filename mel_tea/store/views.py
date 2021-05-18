@@ -1,81 +1,44 @@
-# Source: https://docs.djangoproject.com/en/3.2/topics/auth/default/
-
-#Query set doc: https://docs.djangoproject.com/en/3.2/ref/models/querysets/
-#Django Relationship Models: https://www.webforefront.com/django/setuprelationshipsdjangomodels.html
-
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.http import JsonResponse
+from .utils import *
 import json
 
 #Creating our views with model and forms
 from .models import *
-from .forms import RegisterUserForm
+from .forms import GuestChat, RegisterUserForm
 
 # Functions to direct you towards the correct html path
 
 def store(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        # Get customer order or if complete = false, create new order
-        order, created = CustomerOrder.objects.get_or_create(customer=customer)
-
-        # Get all the items attached to the order of the customer. Querying child obj 
-        # get OrderItem model with orderitem_set.all(). This order is attached to customer
-        items = order.orderitem_set.all()   # (USE ITEM FOR CHILDREN)
-
-        cart_items = order.cart_quantity
-    else:
-        # Maybe make the users create the account?
-        items = []
-        order = {'cart_total':0, 'cart_quantity':0}
-        cart_items = order['cart_quantity']
-    # Get all our object
+    cart = cartData(request)
+    cart_items = cart['cart_items']
+    # order = cart['order']
+    # items = cart['items']
+    
+    # Get all our objects
     products = BobaProduct.objects.all()
     # Dictionary to hold our products
     context = {"products": products, "cart_items": cart_items}
     return render(request, 'store/store.html', context)
 
 def cart(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        # Get customer order or if complete = false, create new order
-        order, created = CustomerOrder.objects.get_or_create(customer=customer)
-
-        # Get all the items attached to the order of the customer. Querying child obj 
-        # get OrderItem model with orderitem_set.all(). This order is attached to customer
-        items = order.orderitem_set.all()   # (USE ITEM FOR CHILDREN)
-
-        # Need to put this to render in cart_page
-        cart_items = order.cart_quantity
-
-    else:
-        # Maybe make the users create the account?
-        items = []
-        order = {'cart_total':0, 'cart_quantity':0}
-        cart_items = order['cart_quantity']
-
+    cart = cartData(request)
+    cart_items = cart['cart_items']
+    order = cart['order']
+    items = cart['items']
+    products = BobaProduct.objects.all()
     context = {"items": items, "order": order, 'cart_items':cart_items}
     return render(request, 'store/cart.html', context)
 
 def checkout(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        # Get customer order or if complete = false, create new order
-        order, created = CustomerOrder.objects.get_or_create(customer=customer)
-
-        # Get all the items attached to the order of the customer. Querying child obj 
-        # get OrderItem model with orderitem_set.all(). This order is attached to customer
-        items = order.orderitem_set.all()   # (USE ITEM FOR CHILDREN)
-        # Need to put this to render in checkout page
-        cart_items = order.cart_quantity
-    else:
-        # Maybe make the users create the account?
-        items = []
-        order = {'cart_total':0, 'cart_quantity':0}
-        cart_items = order['cart_quantity']
+    cart = cartData(request)
+    cart_items = cart['cart_items']
+    order = cart['order']
+    items = cart['items']
     context = {"items":items, "order":order, 'cart_items':cart_items}
     return render(request, 'store/checkout.html', context)
 
@@ -85,21 +48,10 @@ def about(request):
     return render(request, 'store/about.html', context)
 
 def menu(request): 
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        # Get customer order or if complete = false, create new order
-        order, created = CustomerOrder.objects.get_or_create(customer=customer)
-
-        # Get all the items attached to the order of the customer. Querying child obj 
-        # get OrderItem model with orderitem_set.all(). This order is attached to customer
-        items = order.orderitem_set.all()   # (USE ITEM FOR CHILDREN)
-
-        cart_items = order.cart_quantity
-    else:
-        # Maybe make the users create the account?
-        items = []
-        order = {'cart_total':0, 'cart_quantity':0}
-        cart_items = order['cart_quantity']
+    cart = cartData(request)
+    cart_items = cart['cart_items']
+    order = cart['order']
+    items = cart['items']
     # Get all our object
     products = BobaProduct.objects.all()
     # Dictionary to hold our products
@@ -173,7 +125,7 @@ def register(request):
         if request.method == 'POST':
             form = RegisterUserForm(request.POST)
             if form.is_valid(): #if form is valid, save the form
-                form.save()
+                user = form.save()
                 # clean our form and only get the username
                 username = form.cleaned_data.get('username')
                 messages.success(request, "Hello {0}, you have successful registered for an account".format(username))
@@ -182,25 +134,22 @@ def register(request):
     return render(request, 'store/register.html', context)
 
 def guestChat(request):
-    context = {}
-
+    form = GuestChat()
+    if request.method == "POST":
+        form = GuestChat(request.POST)
+        if form.is_valid():
+            guestName = form.cleaned_data.get('guest_name')
+            return render(request, 'chat/room.html', {"guestName": guestName})
+            
+    context = {"form": form}   
     return render(request, 'chat/guestUser.html', context)
+
 def room(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        # Get customer order or if complete = false, create new order
-        order, created = CustomerOrder.objects.get_or_create(customer=customer)
-
-        # Get all the items attached to the order of the customer. Querying child obj 
-        # get OrderItem model with orderitem_set.all(). This order is attached to customer
-        items = order.orderitem_set.all()   # (USE ITEM FOR CHILDREN)
-
-        cart_items = order.cart_quantity
-    else:
-        # Maybe make the users create the account?
-        items = []
-        order = {'cart_total':0, 'cart_quantity':0}
-        cart_items = order['cart_quantity']
+    cart = cartData(request)
+    cart_items = cart['cart_items']
+    order = cart['order']
+    items = cart['items']
+ 
     # Get all our object
     products = BobaProduct.objects.all()
     # Dictionary to hold our products
