@@ -10,17 +10,14 @@ install channels <br>
 brew install redis <br>
     -START REDIS SERVER: redis-server
 
+<br>
 *******************
-MODEL MIGRATIONS
+MODEL MIGRATIONS <br>
+*******************
 python3 manage.py makemigrations - making migrations to DB for each model <br>
 python3 manage.py migrate - applying the migrations <br>
 
-
 <br>
-<br>
-
-
-
 
 
 *******************
