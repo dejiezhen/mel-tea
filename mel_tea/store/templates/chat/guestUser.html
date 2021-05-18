@@ -1,0 +1,13 @@
+<!-- chat/templates/chat/index.html -->
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<div class="guestChat">
+    <h3>Hello Guest! Please enter your name</h3>
+    <form action="GET" id="guestForm">
+        <input type="text" id="guestUser">
+        <input type="submit" id="guestSubmit">
+    </form>
+    <p id="guestError" class='hidden'>Please enter a valid name!</p>
+</div>
+{% endblock %}

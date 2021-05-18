@@ -65,3 +65,24 @@
         width: 40%;
     }
 }
+
+
+.guestChat {
+    display: flex;
+    flex-direction: column;
+    margin: 150px auto;
+    text-align: center;
+    width: 50%;
+
+}
+
+#guestForm input[type=text]{
+    display: block;
+    margin: 10px auto;
+    width: 50%;
+}
+
+#guestForm input[type=submit]{
+    border-radius: 12px;
+    padding: 5px;
+}

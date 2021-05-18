@@ -79,9 +79,6 @@ def checkout(request):
     context = {"items":items, "order":order, 'cart_items':cart_items}
     return render(request, 'store/checkout.html', context)
 
-def simulate(request):
-    context = {}
-    return render(request, 'store/simulate.html', context)
 
 def about(request): 
     context = {}
@@ -184,13 +181,29 @@ def register(request):
     context = {'form': form}
     return render(request, 'store/register.html', context)
 
-def chatbox(request):
+def guestChat(request):
     context = {}
-    return render(request, 'store/chatbox.html', context)
 
-# chat/views.py
-from django.shortcuts import render
-
+    return render(request, 'chat/guestUser.html', context)
 def room(request):
-    return render(request, 'chat/room.html', {
-    })
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        # Get customer order or if complete = false, create new order
+        order, created = CustomerOrder.objects.get_or_create(customer=customer)
+
+        # Get all the items attached to the order of the customer. Querying child obj 
+        # get OrderItem model with orderitem_set.all(). This order is attached to customer
+        items = order.orderitem_set.all()   # (USE ITEM FOR CHILDREN)
+
+        cart_items = order.cart_quantity
+    else:
+        # Maybe make the users create the account?
+        items = []
+        order = {'cart_total':0, 'cart_quantity':0}
+        cart_items = order['cart_quantity']
+    # Get all our object
+    products = BobaProduct.objects.all()
+    # Dictionary to hold our products
+    context = {"products": products, "cart_items": cart_items}
+
+    return render(request, 'chat/room.html', context)
